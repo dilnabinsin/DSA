@@ -27,5 +27,5 @@ function merge(left, right) {
 }
 
 // Example:
-const sorted = mergeSortString("merge");
+const sorted = mergeSortString("dilna");
 console.log(sorted); // "eegmr"
