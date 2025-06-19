@@ -1,3 +1,4 @@
+//separate chaining
 class HashTable{
     constructor(size){
         this.size=size

@@ -34,7 +34,7 @@ class HashTable{
         let index=this._hash(key)
         
         while(this.table[index]!=undefined){
-            if(this.table[index]==key){
+            if(this.table[index][0]==key){
                 return this.table[index][1]
             }
              index=(index+1)%this.size
@@ -58,3 +58,5 @@ ht.set('abin',100)
 ht.set('mathew',200)
 ht.set('niba',300)
 ht.display()
+console.log( ht.get('abin')); // Output: 100
+console.log( ht.get('mathew')); // Output: 200
