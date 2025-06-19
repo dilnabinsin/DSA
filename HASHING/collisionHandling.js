@@ -45,7 +45,8 @@ class HashTable{
     display(){
         this.table.forEach((chain,index)=>{
             if(chain){
-                const items=chain.map(pair=>`[${pair[0]}:${pair[1]}]`)
+                const items=chain.map
+                (pair=>`[${pair[0]}:${pair[1]}]`)
                 
                 console.log(`${index}:${items}`)
             }
