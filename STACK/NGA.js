@@ -1,5 +1,5 @@
 
-//monolothik stack
+
 function nextGreaterElement(arr){
     let stack=[]
     let res=new Array(arr.length).fill(-1)
