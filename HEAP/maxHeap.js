@@ -52,8 +52,10 @@ class MaxHeap {
 
     shiftUp(currentIndex) {
         let parent = this.getParent(currentIndex);
-        while (currentIndex > 0 && this.heap[parent] < this.heap[currentIndex]) {
-            [this.heap[currentIndex], this.heap[parent]] = [this.heap[parent], this.heap[currentIndex]];
+        while (currentIndex > 0 && this.heap[parent] 
+            < this.heap[currentIndex]) {
+            [this.heap[currentIndex], this.heap[parent]] = 
+            [this.heap[parent], this.heap[currentIndex]];
             currentIndex = parent;
             parent = this.getParent(currentIndex);
         }
