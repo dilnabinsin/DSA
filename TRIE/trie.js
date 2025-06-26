@@ -57,26 +57,31 @@ class Trie {
     return true;
   }
 
-  // Helper: collect words from a given node
-  _collect(node, prefix, results) {
-    if (node.isEndOfWord) results.push(prefix);
-    for (const [ch, nextNode] of node.children) {
-      this._collect(nextNode, prefix + ch, results);
-    }
-  }
 
   // Auto-completion / suggestion for a prefix
-  autocomplete(prefix) {
-    let node = this.root;
-    for (const ch of prefix) {
-      if (!node.children.has(ch)) return [];
-      node = node.children.get(ch);
+  autoComplete(prefix) {
+        let node = this.root;
+        for (let char of prefix) {
+            if (!node.children.has(char)) {
+                return `${prefix} : no suggestions found`;
+            }
+            node = node.children.get(char);
+        }
+        return this.printWordWithPrefix(node, prefix);
     }
-    const results = [];
-    this._collect(node, prefix, results);
-    return results;
-  }
-
+printWordWithPrefix(node, prefix) {
+        let words = [];
+        const traverse = (node, currentPrefix) => {
+            if (node.isEndOfWord) {
+                words.push(currentPrefix);
+            }
+            for (let [char, child] of node.children.entries()) {
+                traverse(child, currentPrefix + char);
+            }
+        };
+        traverse(node, prefix);
+        return words.length > 0 ? words : `${prefix} : no suggestions found`;
+    }
   // Find the longest common prefix among inserted words
   findLongestPrefix() {
     let prefix = '';
@@ -110,6 +115,31 @@ class Trie {
       this.insert(word);
     }
   }
+
+ suggest(prefix, max) {
+        let suggestions = this.autoComplete(prefix);
+        if (Array.isArray(suggestions)) {
+            let maxSuggest = suggestions.slice(0, max);
+            return maxSuggest.join(", ");
+        } else {
+            return suggestions;
+        }
+    }
+
+     printWords(){
+        let words = []
+        const traverse = (node , prefix)=>{
+            if(node.isEndOfWord){
+                words.push(prefix)
+            }
+            for (let [char, childNode] of node.children.entries()) {
+            traverse(childNode, prefix + char);
+        }
+        }
+        traverse(this.root , "")
+        return words
+    }
+
 }
 
 // Longest Non-Repeating Substring (Sliding Window)
@@ -132,15 +162,17 @@ function longestNonRepeatingSubstring(s) {
 
 // Example usage:
 const trie = new Trie();
-['caat', 'caap', 'caamp', 'caamel',"caa"].forEach(word => trie.insert(word));
+['cat', 'cap', 'camp', 'camel',"ca","capp","cappp"].forEach(word => trie.insert(word));
 console.log(trie.search('camp'));       // true
 console.log(trie.startsWith('ca'));     // true
-console.log(trie.autocomplete('ca'));   // ['cat','cap','camp','camel']
+console.log(trie.printWords()); 
+console.log(trie.autoComplete("ca")); // ['caat', 'caap', 'caamp', 'caamel', 'caa']
+console.log(trie.autoComplete("cab")); // 'cab : no   // ['cat','cap','camp','camel']
 console.log(trie.findLongestPrefix());   // 'ca'
 const serialized = trie.serialize();
 console.log(serialized);                // JSON array of words
 const newTrie = new Trie();
 newTrie.deserialize(serialized);
-console.log(newTrie.search('caamel'));    // true
-
+console.log(newTrie.search('camel'));    // true
+console.log(trie.suggest("cap" , 2));
 console.log(longestNonRepeatingSubstring('abcabcbb')); // 3
