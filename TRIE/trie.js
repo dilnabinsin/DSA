@@ -139,6 +139,14 @@ printWordWithPrefix(node, prefix) {
         traverse(this.root , "")
         return words
     }
+    findNode(prefix) {
+  let node = this.root;
+  for (let char of prefix) {
+    if (!node.children.has(char)) return null;
+    node = node.children.get(char);
+  }
+  return node;
+}
 
 }
 
@@ -168,7 +176,8 @@ console.log(trie.startsWith('ca'));     // true
 console.log(trie.printWords()); 
 console.log(trie.autoComplete("ca")); // ['caat', 'caap', 'caamp', 'caamel', 'caa']
 console.log(trie.autoComplete("cab")); // 'cab : no   // ['cat','cap','camp','camel']
-console.log(trie.findLongestPrefix());   // 'ca'
+console.log(trie.findLongestPrefix()); 
+console.log(trie.findNode("ca"));
 const serialized = trie.serialize();
 console.log(serialized);                // JSON array of words
 const newTrie = new Trie();
