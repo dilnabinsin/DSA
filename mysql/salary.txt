@@ -1,0 +1,46 @@
+SELECT employee_name, salary
+FROM employees123
+WHERE salary IN (
+    SELECT salary
+    FROM employees123
+    GROUP BY salary
+    HAVING COUNT(*) > 1
+)
+ORDER BY salary DESC, employee_name;
+////////////////////////////////////////////
+Max, 2nd Max, Min, 2nd Min:
+SELECT MAX(salary) AS max_salary
+FROM employees;
+
+SELECT MAX(salary) AS second_max
+FROM employees
+WHERE salary < (SELECT MAX(salary) FROM employees);
+
+SELECT MIN(salary) AS min_salary
+FROM employees;
+
+SELECT MIN(salary) AS second_min
+FROM employees
+WHERE salary > (SELECT MIN(salary) FROM employees);
+
+select dept_id,max(salary) as secondlargest from empl e where 
+salary < (select max(salary) from empl where dept_id =e.dept_id)group by dept_id;
++---------+---------------+
+| dept_id | secondlargest |
++---------+---------------+
+|       1 |         85000 |
+|       2 |         75000 |
+|       3 |         75000 |
++---------+---------------+
+
+SELECT d.dept_name, AVG(e.salary) AS avg_salary
+                                 -> FROM empl e
+                                 -> JOIN dept d ON e.dept_id = d.dept_id
+                                 -> GROUP BY d.dept_name;
++-----------+------------+
+| dept_name | avg_salary |
++-----------+------------+
+| HR        | 85000.0000 |
+| IT        | 78333.3333 |
+| Sales     | 71666.6667 |
++-----------+------------+
