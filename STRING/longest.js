@@ -19,3 +19,4 @@ function longestRepeating(str) {
 
 // Output: { char: 's', count: 3 }
 console.log(longestRepeating("aaabbbbcccsss"));
+
