@@ -1,0 +1,16 @@
+SELECT c.customer_id, c.customer_name
+FROM Customer c
+LEFT JOIN Order o ON c.customer_id = o.customer_id
+WHERE o.order_id IS NULL;
+////////////
+SELECT c.customer_id, c.customer_name, SUM(o.total_amount) AS total_order_amount
+FROM Customer c
+JOIN Order o ON c.customer_id = o.customer_id
+GROUP BY c.customer_id, c.customer_name;
+
+BEGIN;
+UPDATE Employee SET salary = salary + 500 WHERE employee_id = 101;
+INSERT INTO Employee (employee_id, employee_name, salary, department_id)
+VALUES (102, 'John Doe', 60000, 1);
+COMMIT;
+

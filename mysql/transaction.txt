@@ -1,0 +1,17 @@
+BEGIN TRANSACTION;
+UPDATE accounts SET balance = balance - 100 WHERE account_id = 1;
+UPDATE accounts SET balance = balance + 100 WHERE account_id = 2;
+COMMIT;
+
+
+CREATE OR REPLACE PROCEDURE insert_employee(
+emp_id INT,
+emp_name VARCHAR,
+emp_salary DECIMAL,
+dept_id INT
+)
+LANGUAGE SQL
+AS $$
+INSERT INTO Employee (employee_id, employee_name, salary, department_id)
+VALUES (emp_id, emp_name, emp_salary, dept_id);
+$$;

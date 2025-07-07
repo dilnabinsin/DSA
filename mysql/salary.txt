@@ -44,3 +44,14 @@ SELECT d.dept_name, AVG(e.salary) AS avg_salary
 | IT        | 78333.3333 |
 | Sales     | 71666.6667 |
 +-----------+------------+
+
+SELECT employee_name, salary
+FROM Employee
+WHERE salary > (
+    SELECT AVG(salary) FROM Employee
+)
+AND department_id IN (
+    SELECT department_id
+    FROM Department
+    WHERE department_name = 'IT'
+);
