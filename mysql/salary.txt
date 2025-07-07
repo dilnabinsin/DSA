@@ -46,12 +46,38 @@ SELECT d.dept_name, AVG(e.salary) AS avg_salary
 +-----------+------------+
 
 SELECT employee_name, salary
-FROM Employee
+FROM Employee1
 WHERE salary > (
-    SELECT AVG(salary) FROM Employee
+    SELECT AVG(salary) FROM Employee1
 )
 AND department_id IN (
     SELECT department_id
     FROM Department
     WHERE department_name = 'IT'
 );
+
+Query to fetch highest paid employees from each department
+
+SELECT e.employee_name, e.salary, d.department_name
+FROM Employee e
+JOIN Department d ON e.department_id = d.department_id
+WHERE (e.department_id, e.salary) IN (
+SELECT department_id, MAX(salary)
+FROM Employee
+GROUP BY department_id
+);
+
+
+
+
+. Find the student who are not in the department X and Y
+
+select s.student_id ,s.student_name   from Student123 
+s where s.student_id not in(select department_id from Department123 where department_name in("X","Y"));
++------------+--------------+
+| student_id | student_name |
++------------+--------------+
+|          3 | Charlie      |
+|          4 | David        |
+|          5 | Eva          |
+
