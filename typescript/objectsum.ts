@@ -15,3 +15,9 @@ for (let i = 0; i < ab.length; i++) {
 }
 
 console.log("Sum of all 'a' values:", sum); // Output: 15
+
+//////////////////////////
+const numbers: number[] = [1, 2, 3, 4];
+for (const num of numbers) {
+  console.log(num);
+}

@@ -23,3 +23,20 @@ class Rectangle extends Polygon {
 const rect = new Rectangle(10, 20);
 rect.display(); // Abstract class method called
 console.log(rect.getArea()); // 200
+
+//////Create a Class from Interface
+interface User {
+  name: string;
+  age: number;
+}
+
+class Student implements User {
+  constructor(public name: string, public age: number) {}
+
+  info(): void {
+    console.log(`${this.name} is ${this.age} years old`);
+  }
+}
+
+const s = new Student("Alice", 25);
+s.info(); // Alice is 25 years old
