@@ -59,3 +59,25 @@ d.fly();             // Flying
 d.swim();            // Swimming
 
 
+//Constrained Mixins
+type Constructor<T = {}> = new (...args: any[]) => T;
+
+function Timestamped<TBase extends Constructor>(Base: TBase) {
+  return class extends Base {
+    timestamp = Date.now();
+  };
+}
+
+
+class Person {
+  constructor(public name: string) {}
+}
+
+// ✅ Apply mixin
+const TimestampedPerson = Timestamped(Person);
+
+// ✅ Create instance
+const p = new TimestampedPerson("Dilna");
+
+console.log("Name:", p.name);           // "Dilna"
+console.log("Timestamp:", p.timestamp); // e.g., 1721030304040

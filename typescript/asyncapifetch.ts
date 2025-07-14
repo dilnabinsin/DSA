@@ -15,3 +15,14 @@ async function getData() {
   console.log(result); // ✅ Done
 }
 getData();
+//Async with Promises or async/await with Proper Error Handling
+async function fetchData(): Promise<string> {
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+    const data = await response.json();
+    return JSON.stringify(data);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return "Error occurred";
+  }
+}

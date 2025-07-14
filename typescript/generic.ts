@@ -25,3 +25,11 @@ function sum<T extends number>(a: T, b: T): T {
 
 const result =sum(10,20)
 console.log(result)
+/////////////////////////////////
+function* generateNumbers() {
+  yield 1;
+  yield 2;
+}
+
+const gen = generateNumbers();
+console.log(gen.next().value); // 1
