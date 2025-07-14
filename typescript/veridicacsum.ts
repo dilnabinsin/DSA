@@ -5,3 +5,7 @@ function sumAndAverage(...nums: number[]): { sum: number; average: number } {
 }
 
 console.log(sumAndAverage(10, 20, 30)); // { sum: 60, average: 20 }
+//Practice Writing Function Signature
+function greet(name: string): string {
+  return `Hello, ${name}`;
+}

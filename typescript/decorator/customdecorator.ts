@@ -1,4 +1,12 @@
 
+function Logger(constructor: Function) {
+  console.log("Creating instance of:", constructor.name);
+}
+
+@Logger
+class MyClass {}
+
+
 //Create a Custom Decorator
 function Logger(constructor: Function) {
   console.log(`Class ${constructor.name} is created`);

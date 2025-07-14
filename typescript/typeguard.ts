@@ -76,3 +76,27 @@ function printPersonDetails(person: Admin | User) {
 
 printPersonDetails(admin);  // Output: Admin Role: superadmin
 printPersonDetails(user);   // Output: Username: dilna
+
+
+//in Operator Guard – for object properties
+
+type Circle = { radius: number };
+type Rectangle = { width: number; height: number };
+
+function getArea(shape: Circle | Rectangle): number {
+  if ('radius' in shape) {
+    // Circle
+    return Math.PI * shape.radius ** 2;
+  } else {
+    // Rectangle
+    return shape.width * shape.height;
+  }
+}
+
+// Example usage:
+const circle: Circle = { radius: 5 };
+const rectangle: Rectangle = { width: 10, height: 4 };
+
+console.log("Circle Area:", getArea(circle));      // 78.53981633974483
+console.log("Rectangle Area:", getArea(rectangle)); // 40
+

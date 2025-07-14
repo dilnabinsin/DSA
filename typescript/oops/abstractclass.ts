@@ -40,3 +40,13 @@ class Student implements User {
 
 const s = new Student("Alice", 25);
 s.info(); // Alice is 25 years old
+///
+abstract class Animal {
+  abstract sound(): void;
+}
+
+class Cat extends Animal {
+  sound() {
+    console.log("Meow");
+  }
+}
