@@ -9,3 +9,6 @@ type B = { age: number };
 type AB = A & B;
 
 const person: AB = { name: "Alice", age: 30 };
+
+
+
